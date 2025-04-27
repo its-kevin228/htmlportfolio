@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Développeur Web</title>
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      theme:
+      {
+        extend:
+        {
+          colors: { primary: '#6366f1', secondary: '#4f46e5' }
+          , borderRadius: { 'none': '0px', 'sm': '4px', DEFAULT: '8px', 'md': '12px', 'lg': '16px', 'xl': '20px', '2xl': '24px', '3xl': '32px', 'full': '9999px', 'button': '8px' }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+  <div id="custom-cursor" class="custom-cursor"></div>
+  <div id="walking-character" class="fixed bottom-8 z-40 pointer-events-none" style="width: 200px; height: 200px;">
+    <img
+      src="https://readdy.ai/api/search-image?query=cute%203D%20character%20mascot%2C%20friendly%20robot%20or%20android%2C%20modern%20design%2C%20playful%20expression%2C%20vibrant%20colors%2C%20transparent%20background%2C%20isometric%20view%2C%20character%20design&width=400&height=400&seq=character1&orientation=squarish"
+      alt="Walking Character" class="w-full h-full object-contain"
+      style="animation: walkingCharacter 20s linear infinite, bounceUpDown 4s ease-in-out infinite;">
+  </div>
+  <div class="loader" id="loader">
+    <div class="loader-content"></div>
+  </div>
+  <header class="fixed top-0 left-0 w-full z-50 glass transition-all duration-500" id="main-header">
+    <div class="container mx-auto px-6 py-4 transition-all duration-500">
+      <div class="flex justify-between items-center relative">
+        <a href="#" class="text-3xl font-['Pacifico'] text-primary logo transition-all duration-300">kévin.pekpeli</a>
+        <nav class="hidden md:flex space-x-6">
+          <a href="#accueil" class="flex items-center space-x-1">
+            <i class="ri-home-line ri-lg nav-icon"></i>
+            <span
+              class="nav-text relative text-gray-800 hover:text-primary transition-colors duration-300 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-primary after:left-0 after:bottom-0 after:transition-all after:duration-300 hover:after:w-full">Accueil</span>
+          </a>
+          <a href="#competences" class="flex items-center space-x-1">
+            <i class="ri-code-line ri-lg nav-icon"></i>
+            <span
+              class="nav-text relative text-gray-800 hover:text-primary transition-colors duration-300 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-primary after:left-0 after:bottom-0 after:transition-all after:duration-300 hover:after:w-full">Compétences</span>
+          </a>
+          <a href="#projets" class="flex items-center space-x-1">
+            <i class="ri-folder-line ri-lg nav-icon"></i>
+            <span
+              class="nav-text relative text-gray-800 hover:text-primary transition-colors duration-300 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-primary after:left-0 after:bottom-0 after:transition-all after:duration-300 hover:after:w-full">Projets</span>
+          </a>
+          <a href="#experience" class="flex items-center space-x-1">
+            <i class="ri-briefcase-line ri-lg nav-icon"></i>
+            <span
+              class="nav-text relative text-gray-800 hover:text-primary transition-colors duration-300 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-primary after:left-0 after:bottom-0 after:transition-all after:duration-300 hover:after:w-full">Expérience</span>
+          </a>
+          <a href="#contact"
+            class="neon-button bg-primary text-white px-4 py-2 !rounded-button shadow-lg hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap flex items-center space-x-1">
+            <i class="ri-mail-line nav-icon"></i>
+            <span class="nav-text">Contact</span>
+          </a>
+        </nav>
+        <button class="md:hidden w-10 h-10 flex items-center justify-center" id="mobile-menu-button">
+          <i class="ri-menu-line ri-2x"></i>
+        </button>
+      </div>
+      <div class="md:hidden hidden transition-all duration-300 py-4 space-y-4" id="mobile-menu">
+        <a href="#accueil" class="block text-gray-800 hover:text-primary transition-colors duration-300">Accueil</a>
+        <a href="#competences"
+          class="block text-gray-800 hover:text-primary transition-colors duration-300">Compétences</a>
+        <a href="#projets" class="block text-gray-800 hover:text-primary transition-colors duration-300">Projets</a>
+        <a href="#experience"
+          class="block text-gray-800 hover:text-primary transition-colors duration-300">Expérience</a>
+        <a href="#contact"
+          class="block bg-primary text-white px-6 py-2 !rounded-button shadow-lg hover:bg-opacity-90 transition-all duration-300 w-full text-center whitespace-nowrap">Contact</a>
+      </div>
+    </div>
+  </header>
+  <section id="accueil" class="min-h-screen flex items-center relative overflow-hidden pt-24">
+    <div id="particles-js"></div>
+    <div class="container mx-auto px-6 py-12 relative z-10">
+      <div class="flex flex-col md:flex-row items-center justify-between">
+        <div class="md:w-1/2 mb-12 md:mb-0">
+          <h2 class="text-2xl font-medium text-primary mb-4">Bonjour, je suis</h2>
+          <h1 class="text-5xl md:text-6xl font-bold mb-6 typewriter">Kévin PEKPELI</h1>
+          <p class="text-xl text-gray-600 mb-8 max-w-lg">Le code est un langage, mais l'expérience est l'émotion. Avec
+            React, Next.js, Node.js et Flutter, je raconte des histoires où la technologie disparaît derrière
+            l'évidence.
+
+          </p>
+          <div class="flex space-x-4">
+            <a href="#projets"
+              class="bg-primary text-white px-8 py-3 !rounded-button shadow-lg hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">Voir
+              mes projets</a>
+            <a href="#contact"
+              class="border-2 border-primary text-primary px-8 py-3 !rounded-button hover:bg-primary hover:text-white transition-all duration-300 whitespace-nowrap">Me
+              contacter</a>
+          </div>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+          <div class="relative w-80 h-80 md:w-96 md:h-96">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="relative w-full h-full">
+                <div
+                  class="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent rounded-full animate-spin-slow">
+                </div>
+                <div
+                  class="absolute inset-8 bg-gradient-to-bl from-primary/5 to-transparent rounded-full animate-spin-reverse">
+                </div>
+                <div
+                  class="absolute inset-16 bg-gradient-to-tr from-primary/10 to-transparent rounded-full animate-pulse-slow">
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-32 h-32 relative">
+                    <div class="absolute inset-0 bg-primary/20 rounded-lg transform rotate-45 animate-float"></div>
+                    <div class="absolute inset-0 bg-primary/20 rounded-lg transform -rotate-45 animate-float-delay">
+                    </div>
+                  </div>
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-48 h-48 border-4 border-primary/20 rounded-full animate-pulse"></div>
+                </div>
+                <div class="absolute inset-0">
+                  <div class="w-full h-full flex items-center justify-center">
+                    <div class="w-64 h-64 border border-primary/10 rounded-full animate-ripple"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <a href="#competences" class="w-10 h-10 flex items-center justify-center text-primary">
+          <i class="ri-arrow-down-line ri-2x"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section id="competences" class="py-20 bg-white relative overflow-hidden">
+    <div class="container mx-auto px-6 relative z-10 section">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Mes Compétences</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Un aperçu des technologies et des outils que j'utilise
+          quotidiennement pour créer des applications web modernes et performantes.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          class="bg-white p-8 rounded-lg shadow-xl card-3d border border-gray-100 hover:shadow-2xl transition-all duration-500 relative overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-r before:from-primary/5 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500">
+          <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-6">
+            <i class="ri-code-s-slash-line ri-2x text-primary"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Développement Frontend</h3>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-medium">HTML/CSS</span>
+                <span>95%</span>
+              </div>
+              <div class="w-full h-2 bg-gray-200 rounded-full">
+                <div class="progress-bar h-full bg-primary rounded-full" style="--progress: 95%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-medium">JavaScript/Typescript</span>
+                <span>90%</span>
+              </div>
+              <div class="w-full h-2 bg-gray-200 rounded-full">
+                <div class="progress-bar h-full bg-primary rounded-full" style="--progress: 90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-medium">React</span>
+                <span>82%</span>
+              </div>
+              <div class="w-full h-2 bg-gray-200 rounded-full">
+                <div class="progress-bar h-full bg-primary rounded-full" style="--progress: 82%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-medium">Next.js</span>
+                <span>88%</span>
+              </div>
+              <div class="w-full h-2 bg-gray-200 rounded-full">
+                <div class="progress-bar h-full bg-primary rounded-full" style="--progress: 88%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow-lg card-3d border border-gray-100">
+          <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-6">
+            <i class="ri-server-line ri-2x text-primary"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Développement Backend</h3>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-medium">Node.js</span>
+                <span>87%</span>
+              </div>
+              <div class="w-full h-2 bg-gray-200 rounded-full">
+                <div class="progress-bar h-full bg-primary rounded-full" style="--progress: 87%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-medium">Express</span>
+                <span>85%</span>
+              </div>
+              <div class="w-full h-2 bg-gray-200 rounded-full">
+                <div class="progress-bar h-full bg-primary rounded-full" style="--progress: 85%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-medium">Python</span>
+                <span>78%</span>
+              </div>
+              <div class="w-full h-2 bg-gray-200 rounded-full">
+                <div class="progress-bar h-full bg-primary rounded-full" style="--progress: 78%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-medium">PHP</span>
+                <span>75%</span>
+              </div>
+              <div class="w-full h-2 bg-gray-200 rounded-full">
+                <div class="progress-bar h-full bg-primary rounded-full" style="--progress: 75%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow-lg card-3d border border-gray-100">
+          <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-6">
+            <i class="ri-database-2-line ri-2x text-primary"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Base de données & DevOps</h3>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-medium">MongoDB</span>
+                <span>86%</span>
+              </div>
+              <div class="w-full h-2 bg-gray-200 rounded-full">
+                <div class="progress-bar h-full bg-primary rounded-full" style="--progress: 86%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-medium">MySQL</span>
+                <span>83%</span>
+              </div>
+              <div class="w-full h-2 bg-gray-200 rounded-full">
+                <div class="progress-bar h-full bg-primary rounded-full" style="--progress: 83%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-medium">Postgres</span>
+                <span>83%</span>
+              </div>
+              <div class="w-full h-2 bg-gray-200 rounded-full">
+                <div class="progress-bar h-full bg-primary rounded-full" style="--progress: 83%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-medium">Docker</span>
+                <span>80%</span>
+              </div>
+              <div class="w-full h-2 bg-gray-200 rounded-full">
+                <div class="progress-bar h-full bg-primary rounded-full" style="--progress: 80%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-medium">Firebase</span>
+                <span>72%</span>
+              </div>
+              <div class="w-full h-2 bg-gray-200 rounded-full">
+                <div class="progress-bar h-full bg-primary rounded-full" style="--progress: 72%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-16">
+        <h3 class="text-2xl font-bold mb-8 text-center">Technologies que j'utilise</h3>
+        <div class="flex flex-wrap justify-center gap-8">
+          <div class="skill-icon w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative before:content-[''] before:absolute before:inset-0 before:bg-primary/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-lg">
+            <i class="ri-html5-fill ri-2x text-[#E34F26]"></i>
+          </div>
+          <div class="skill-icon w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative before:content-[''] before:absolute before:inset-0 before:bg-primary/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-lg">
+            <i class="ri-css3-fill ri-2x text-[#1572B6]"></i>
+          </div>
+          <div class="skill-icon w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative before:content-[''] before:absolute before:inset-0 before:bg-primary/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-lg">
+            <i class="ri-javascript-fill ri-2x text-[#F7DF1E]"></i>
+          </div>
+          <div class="skill-icon w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative before:content-[''] before:absolute before:inset-0 before:bg-primary/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-lg">
+            <i class="ri-reactjs-line ri-2x text-[#61DAFB]"></i>
+          </div>
+          <div class="skill-icon w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative before:content-[''] before:absolute before:inset-0 before:bg-primary/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-lg">
+            <i class="ri-nodejs-line ri-2x text-[#339933]"></i>
+          </div>
+          <div class="skill-icon w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative before:content-[''] before:absolute before:inset-0 before:bg-primary/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-lg">
+            <i class="ri-database-2-line ri-2x text-[#47A248]"></i>
+          </div>
+          <div class="skill-icon w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative before:content-[''] before:absolute before:inset-0 before:bg-primary/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-lg">
+            <i class="ri-git-branch-line ri-2x text-[#F05032]"></i>
+          </div>
+          <div class="skill-icon w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative before:content-[''] before:absolute before:inset-0 before:bg-primary/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-lg">
+            <i class="ri-nextjs-line ri-2x text-[#000000]"></i>
+          </div>
+          <div class="skill-icon w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative before:content-[''] before:absolute before:inset-0 before:bg-primary/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-lg">
+            <i class="ri-firebase-fill ri-2x text-[#FFCB2B]"></i>
+          </div>
+          <div class="skill-icon w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative before:content-[''] before:absolute before:inset-0 before:bg-primary/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-lg">
+            <i class="ri-github-fill ri-2x text-[#24292F]"></i>
+          </div>
+          <div class="skill-icon w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative before:content-[''] before:absolute before:inset-0 before:bg-primary/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-lg">
+            <i class="ri-fastapi-line ri-2x text-[#009639]"></i>
+          </div>
+          <div class="skill-icon w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative before:content-[''] before:absolute before:inset-0 before:bg-primary/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-lg">
+            <i class="ri-gitlab-fill ri-2x text-[#FC6D26]"></i>
+          </div>
+          <div class="skill-icon w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative before:content-[''] before:absolute before:inset-0 before:bg-primary/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-lg">
+            <i class="ri-javascript-fill ri-2x text-[#3178C6]"></i>
+          </div>
+          <div class="skill-icon w-16 h-16 flex items-center justify-center bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative before:content-[''] before:absolute before:inset-0 before:bg-primary/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-lg">
+            <i class="ri-expressjs-line ri-2x text-[#000000]"></i>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="mt-20">
+        <div id="skills-chart" class="w-full h-80"></div>
+      </div>
+    </div>
+  </section>
+  <section id="projets" class="py-20 bg-gray-50 relative overflow-hidden">
+    <div class="container mx-auto px-6 relative z-10 section">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Mes Projets</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Découvrez une sélection de mes réalisations récentes, mettant
+          en valeur mes compétences en développement web.</p>
+      </div>
+      <div class="flex justify-center mb-8">
+        <div class="inline-flex bg-white p-1 rounded-full shadow-md">
+          <button class="filter-button active px-6 py-2 rounded-full whitespace-nowrap" data-filter="all">Tous</button>
+          <button class="filter-button px-6 py-2 rounded-full whitespace-nowrap" data-filter="web">Web</button>
+          <button class="filter-button px-6 py-2 rounded-full whitespace-nowrap" data-filter="mobile">Mobile</button>
+          <button class="filter-button px-6 py-2 rounded-full whitespace-nowrap" data-filter="design">Design</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+        <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="web">
+          <div class="relative h-56 overflow-hidden">
+            <img
+              src="https://readdy.ai/api/search-image?query=modern%20e-commerce%20website%20interface%20with%20clean%20design%2C%20product%20listings%2C%20shopping%20cart%2C%20payment%20options%2C%20responsive%20layout%2C%20professional%20UI%2FUX%20design%2C%20website%20mockup%20on%20desktop%20screen&width=600&height=400&seq=portfolio2&orientation=landscape"
+              alt="E-commerce Platform"
+              class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="text-xl font-bold">E-commerce Platform</h3>
+              <span class="text-xs font-medium bg-blue-100 text-blue-800 py-1 px-2 rounded-full">Web</span>
+            </div>
+            <p class="text-gray-600 mb-4">Une plateforme e-commerce complète avec panier d'achat, paiement sécurisé et
+              gestion des commandes.</p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Next</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Node.js</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">MongoDB</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Stripe</span>
+            </div>
+            <button
+              class="view-project-btn w-full bg-primary text-white py-2 !rounded-button hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+              data-id="1">Voir le projet</button>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="mobile">
+          <div class="relative h-56 overflow-hidden">
+            <img
+              src="https://readdy.ai/api/search-image?query=fitness%20tracking%20mobile%20app%20interface%20showing%20workout%20tracking%2C%20nutrition%20logging%2C%20progress%20charts%2C%20user%20profile%2C%20clean%20modern%20UI%20design%2C%20mobile%20app%20mockup%20on%20smartphone%20screen&width=600&height=400&seq=portfolio3&orientation=landscape"
+              alt="Fitness Tracking App"
+              class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="text-xl font-bold">Fitness Tracking App</h3>
+              <span class="text-xs font-medium bg-green-100 text-green-800 py-1 px-2 rounded-full">Mobile</span>
+            </div>
+            <p class="text-gray-600 mb-4">Application mobile pour suivre les entraînements, la nutrition et les progrès
+              fitness avec visualisation des données.</p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Flutter</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Firebase</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Redux</span>
+             
+            </div>
+            <button
+              class="view-project-btn w-full bg-primary text-white py-2 !rounded-button hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+              data-id="2">Voir le projet</button>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="design">
+          <div class="relative h-56 overflow-hidden">
+            <img
+              src="https://readdy.ai/api/search-image?query=dashboard%20UI%20design%20with%20data%20visualization%2C%20analytics%20charts%2C%20user%20statistics%2C%20modern%20admin%20panel%2C%20dark%20theme%2C%20professional%20interface%20design%2C%20clean%20layout%20with%20graphs%20and%20metrics&width=600&height=400&seq=portfolio4&orientation=landscape"
+              alt="Dashboard UI Design"
+              class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="text-xl font-bold">Dashboard UI Design</h3>
+              <span class="text-xs font-medium bg-purple-100 text-purple-800 py-1 px-2 rounded-full">Design</span>
+            </div>
+            <p class="text-gray-600 mb-4">Design d'interface utilisateur pour un tableau de bord d'analyse avec
+              visualisations de données interactives.</p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Figma</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Adobe XD</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">UI/UX</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Prototyping</span>
+            </div>
+            <button
+              class="view-project-btn w-full bg-primary text-white py-2 !rounded-button hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+              data-id="3">Voir le projet</button>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="web">
+          <div class="relative h-56 overflow-hidden">
+            <img
+              src="https://readdy.ai/api/search-image?query=real%20estate%20property%20listing%20website%20with%20property%20search%2C%20map%20integration%2C%20virtual%20tours%2C%20contact%20forms%2C%20modern%20web%20design%2C%20responsive%20layout%2C%20professional%20real%20estate%20website%20interface&width=600&height=400&seq=portfolio5&orientation=landscape"
+              alt="Real Estate Platform"
+              class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="text-xl font-bold">Real Estate Platform</h3>
+              <span class="text-xs font-medium bg-blue-100 text-blue-800 py-1 px-2 rounded-full">Web</span>
+            </div>
+            <p class="text-gray-600 mb-4">Plateforme immobilière avec recherche avancée, intégration de cartes et
+              visites virtuelles des propriétés.</p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Reat</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Node.js</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">MongoDB</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Google Maps API</span>
+            </div>
+            <button
+              class="view-project-btn w-full bg-primary text-white py-2 !rounded-button hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+              data-id="4">Voir le projet</button>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="mobile">
+          <div class="relative h-56 overflow-hidden">
+            <img
+              src="https://readdy.ai/api/search-image?query=food%20delivery%20mobile%20app%20interface%20with%20restaurant%20listings%2C%20menu%20browsing%2C%20order%20tracking%2C%20payment%20options%2C%20modern%20UI%20design%2C%20food%20delivery%20app%20mockup%20on%20smartphone&width=600&height=400&seq=portfolio6&orientation=landscape"
+              alt="Food Delivery App"
+              class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="text-xl font-bold">Food Delivery App</h3>
+              <span class="text-xs font-medium bg-green-100 text-green-800 py-1 px-2 rounded-full">Mobile</span>
+            </div>
+            <p class="text-gray-600 mb-4">Application de livraison de nourriture avec commande en temps réel, suivi de
+              livraison et paiement intégré.</p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Flutter</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Firebase</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Google Maps</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Stripe</span>
+            </div>
+            <button
+              class="view-project-btn w-full bg-primary text-white py-2 !rounded-button hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+              data-id="5">Voir le projet</button>
+          </div>
+        </div>
+        <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg" data-category="design">
+          <div class="relative h-56 overflow-hidden">
+            <img
+              src="https://readdy.ai/api/search-image?query=brand%20identity%20design%20for%20a%20tech%20startup%20showing%20logo%20variations%2C%20color%20palette%2C%20typography%2C%20business%20cards%2C%20letterhead%2C%20website%20mockup%2C%20cohesive%20brand%20design%20system&width=600&height=400&seq=portfolio7&orientation=landscape"
+              alt="Brand Identity Design"
+              class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="text-xl font-bold">Brand Identity Design</h3>
+              <span class="text-xs font-medium bg-purple-100 text-purple-800 py-1 px-2 rounded-full">Design</span>
+            </div>
+            <p class="text-gray-600 mb-4">Création d'identité visuelle complète pour une startup tech, incluant logo,
+              typographie et guidelines.</p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Illustrator</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Photoshop</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">InDesign</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Branding</span>
+            </div>
+            <button
+              class="view-project-btn w-full bg-primary text-white py-2 !rounded-button hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+              data-id="6">Voir le projet</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div id="project-modal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="modal-content bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-2xl font-bold" id="modal-title">Titre du projet</h3>
+          <button id="close-modal" class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-gray-800">
+            <i class="ri-close-line ri-2x"></i>
+          </button>
+        </div>
+        <div class="mb-6">
+          <img id="modal-image" src="" alt="Project Image" class="w-full h-auto rounded-lg">
+        </div>
+        <div class="mb-6">
+          <h4 class="text-xl font-bold mb-2">Description</h4>
+          <p id="modal-description" class="text-gray-600">Description du projet</p>
+        </div>
+        <div class="mb-6">
+          <h4 class="text-xl font-bold mb-2">Technologies utilisées</h4>
+          <div id="modal-technologies" class="flex flex-wrap gap-2"></div>
+        </div>
+        <div class="mb-6">
+          <h4 class="text-xl font-bold mb-2">Fonctionnalités clés</h4>
+          <ul id="modal-features" class="list-disc pl-5 text-gray-600 space-y-1"></ul>
+        </div>
+        <div class="flex justify-end">
+          <a id="modal-live-link" href="#" target="_blank"
+            class="bg-primary text-white px-6 py-2 !rounded-button hover:bg-opacity-90 transition-all duration-300 mr-3 whitespace-nowrap">Voir
+            en ligne</a>
+          <a id="modal-github-link" href="#" target="_blank"
+            class="border border-primary text-primary px-6 py-2 !rounded-button hover:bg-primary hover:text-white transition-all duration-300 whitespace-nowrap">Code
+            source</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section id="experience" class="py-20 bg-white relative overflow-hidden">
+    <div class="container mx-auto px-6 relative z-10 section">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Mon Parcours</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Un aperçu de mon expérience professionnelle et de mon
+          parcours académique dans le domaine du développement web.</p>
+      </div>
+      <div class="relative">
+        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-200"></div>
+        <div class="timeline-item mb-16 relative">
+          <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-primary rounded-full z-10">
+          </div>
+          <div
+            class="mr-auto ml-8 md:ml-0 md:mr-0 md:ml-auto md:w-5/12 md:pl-8 bg-white p-6 rounded-lg shadow-lg relative">
+            <div class="absolute top-6 -left-4 w-8 h-8 bg-white transform rotate-45 hidden md:block"></div>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-bold">Génie Logiciel & Systemes d'Informations</h3>
+              <span class="text-sm font-medium bg-primary bg-opacity-10 text-primary py-1 px-3 rounded-full">2023 -
+                2026</span>
+            </div>
+            <h4 class="text-lg font-medium text-gray-600 mb-4">Institut Africain d'Informatique (IAI-Togo)</h4>
+            <p class="text-gray-600">Développement Logiciel</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Next.js</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">TypeScript</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">tailwindcss</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Python</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">java</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">spring & spring-boot</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Laravel</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Angular</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">SQL</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Python</span>
+
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item mb-16 relative">
+          <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-primary rounded-full z-10">
+          </div>
+          <div
+            class="ml-auto mr-8 md:mr-0 md:ml-0 md:mr-auto md:w-5/12 md:pr-8 bg-white p-6 rounded-lg shadow-lg relative">
+            <div class="absolute top-6 -right-4 w-8 h-8 bg-white transform rotate-45 hidden md:block"></div>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-bold">Développeur Web</h3>
+              <span class="text-sm font-medium bg-primary bg-opacity-10 text-primary py-1 px-3 rounded-full">2025 -
+                Hybride</span>
+            </div>
+            <h4 class="text-lg font-medium text-gray-600 mb-4">La-a-la</h4>
+            <p class="text-gray-600">Création des interfaces web complexes pour la gestion des utilisateurs et contenus
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">React</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Node.js</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Next.js</span>
+
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item mb-16 relative">
+          <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-primary rounded-full z-10">
+          </div>
+          <div
+            class="mr-auto ml-8 md:ml-0 md:mr-0 md:ml-auto md:w-5/12 md:pl-8 bg-white p-6 rounded-lg shadow-lg relative">
+            <div class="absolute top-6 -left-4 w-8 h-8 bg-white transform rotate-45 hidden md:block"></div>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-bold">Developpeur web freelance</h3>
+              <span class="text-sm font-medium bg-primary bg-opacity-10 text-primary py-1 px-3 rounded-full">2024 -
+                2025</span>
+            </div>
+            <h4 class="text-lg font-medium text-gray-600 mb-4">Indépendant</h4>
+            <p class="text-gray-600">Développement d'application web et mobile.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Next.js</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">TypeScript</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">tailwindcss</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Python</span>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item mb-16 relative">
+          <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-primary rounded-full z-10">
+          </div>
+          <div
+            class="mr-auto ml-8 md:ml-0 md:mr-0 md:ml-auto md:w-5/12 md:pl-8 bg-white p-6 rounded-lg shadow-lg relative">
+            <div class="absolute top-6 -left-4 w-8 h-8 bg-white transform rotate-45 hidden md:block"></div>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-bold">Developpeur Backend</h3>
+              <span class="text-sm font-medium bg-primary bg-opacity-10 text-primary py-1 px-3 rounded-full">
+                2025</span>
+            </div>
+            <h4 class="text-lg font-medium text-gray-600 mb-4">Numerum dev center</h4>
+            <p class="text-gray-600">Développement d'application web</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Node.js</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">TypeScript</span>
+              <span class="text-xs bg-gray-100 py-1 px-2 rounded-full">Javascipt</span>
+
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item mb-16 relative">
+          <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-primary rounded-full z-10">
+          </div>
+
+        </div>
+      </div>
+      <div class="timeline-item relative">
+        <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-primary rounded-full z-10">
+        </div>
+        <div
+          class="mr-auto ml-8 md:ml-0 md:mr-0 md:ml-auto md:w-5/12 md:pl-8 bg-white p-6 rounded-lg shadow-lg relative">
+          <div class="absolute top-6 -left-4 w-8 h-8 bg-white transform rotate-45 hidden md:block"></div>
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold">Baccalauréat série D</h3>
+            <span class="text-sm font-medium bg-primary bg-opacity-10 text-primary py-1 px-3 rounded-full">2022 -
+              2023</span>
+          </div>
+          <h4 class="text-lg font-medium text-gray-600 mb-4">College Privé Clémence Divine</h4>
+
+
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  <section id="contact" class="py-20 bg-gray-50 relative overflow-hidden">
+    <div class="container mx-auto px-6 relative z-10 section">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Me Contacter</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Vous avez un projet en tête ou une opportunité à discuter ?
+          N'hésitez pas à me contacter !</p>
+      </div>
+      <div class="flex flex-col lg:flex-row gap-12">
+        <div class="lg:w-1/2">
+          <form id="contact-form" class="space-y-6">
+            <div>
+              <label for="name" class="block text-gray-700 font-medium mb-2">Nom</label>
+              <input type="text" id="name"
+                class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary transition-all duration-300"
+                placeholder="Votre nom">
+            </div>
+            <div>
+              <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+              <input type="email" id="email"
+                class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary transition-all duration-300"
+                placeholder="Votre email">
+            </div>
+            <div>
+              <label for="subject" class="block text-gray-700 font-medium mb-2">Sujet</label>
+              <input type="text" id="subject"
+                class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary transition-all duration-300"
+                placeholder="Sujet de votre message">
+            </div>
+            <div>
+              <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+              <textarea id="message" rows="5"
+                class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary transition-all duration-300"
+                placeholder="Votre message"></textarea>
+            </div>
+            <button type="submit"
+              class="w-full bg-primary text-white py-3 !rounded-button hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">Envoyer
+              le message</button>
+          </form>
+        </div>
+        <div class="lg:w-1/2">
+          <div class="bg-white p-8 rounded-lg shadow-lg h-full">
+            <h3 class="text-2xl font-bold mb-6">Informations de contact</h3>
+            <div class="space-y-6">
+              <div class="flex items-start">
+                <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4">
+                  <i class="ri-map-pin-line ri-lg text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-gray-900 mb-1">Adresse</h4>
+                  <p class="text-gray-600">CampGP,Lomé-TOGO</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4">
+                  <i class="ri-mail-line ri-lg text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-gray-900 mb-1">Email</h4>
+                  <p class="text-gray-600">pekpelignimdoukevin@gmail.com</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4">
+                  <i class="ri-phone-line ri-lg text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-gray-900 mb-1">Téléphone</h4>
+                  <p class="text-gray-600">+228 93 15 88 01</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8">
+              <h4 class="font-medium text-gray-900 mb-4">Suivez-moi</h4>
+              <div class="flex space-x-4">
+                <a href="https://github.com/its-kevin228"
+                  class="social-icon w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-all duration-300">
+                  <i class="ri-github-fill"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/pekpeli-gnimdou-k%C3%A9vin/"
+                  class="social-icon w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-all duration-300">
+                  <i class="ri-linkedin-fill"></i>
+                </a>
+
+              </div>
+            </div>
+            <div class="mt-8 h-64 bg-gray-100 rounded-lg overflow-hidden">
+              <img src="lome.jpg" alt="Map" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-8 md:mb-0">
+          <a href="#" class="text-3xl font-['Pacifico'] text-white mb-4 inline-block">Kévin.PEKPELI</a>
+          <p class="text-gray-400 max-w-md">Le code est un langage, mais l'expérience est l'émotion. Avec
+            React, Next.js, Node.js et Flutter, je raconte des histoires où la technologie disparaît derrière
+            l'évidence.
+          </p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-8">
+          <div>
+            <h4 class="text-lg font-bold mb-4">Navigation</h4>
+            <ul class="space-y-2">
+              <li><a href="#accueil" class="text-gray-400 hover:text-white transition-colors duration-300">Accueil</a>
+              </li>
+              <li><a href="#competences"
+                  class="text-gray-400 hover:text-white transition-colors duration-300">Compétences</a></li>
+              <li><a href="#projets" class="text-gray-400 hover:text-white transition-colors duration-300">Projets</a>
+              </li>
+              <li><a href="#experience"
+                  class="text-gray-400 hover:text-white transition-colors duration-300">Expérience</a></li>
+              <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors duration-300">Contact</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold mb-4">Services</h4>
+            <ul class="space-y-2">
+              <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Développement
+                  Web</a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Applications
+                  Mobiles</a></li>
+
+
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold mb-4">Légal</h4>
+            <ul class="space-y-2">
+              <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Mentions légales</a>
+              </li>
+              <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Politique de
+                  confidentialité</a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Conditions
+                  d'utilisation</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-400">© 2025 Kévin PEKPELI. Tous droits réservés.</p>
+        <div class="flex space-x-6 mt-4 md:mt-0">
+          <a href="https://github.com/its-kevin228"
+            class="social-icon text-gray-400 hover:text-white transition-colors duration-300">
+            <i class="ri-github-fill ri-lg"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/pekpeli-gnimdou-k%C3%A9vin/"
+            class="social-icon text-gray-400 hover:text-white transition-colors duration-300">
+            <i class="ri-linkedin-fill ri-lg"></i>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+  <a href="#" id="back-to-top"
+    class="fixed bottom-8 right-8 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300 z-50">
+    <i class="ri-arrow-up-line ri-lg"></i>
+  </a>
+  <div class="theme-switch fixed top-24 right-8 z-50" id="theme-switch"></div>
+  <script src="script.js"></script>
+</body>
+
+</html>
